@@ -8,6 +8,8 @@ git clone https://github.com/sathwickp/claude-addons.git && cd claude-addons && 
 
 Or open the repo in Claude Code and say `set me up`.
 
+![demo](demo/claude-addons.gif)
+
 ---
 
 | Addon | What it does | Command |
@@ -109,7 +111,7 @@ After you implement something, `/verify` tries to break it. It can't modify your
 1. Build passes
 2. Test suite passes
 3. Linters and type-checkers pass
-4. Type-specific verification (11 strategies — see below)
+4. Type-specific verification (10 strategies — see below)
 5. Adversarial probes (concurrency, boundary values, idempotency)
 
 **Anti-rationalization guards** teach Claude to recognize its own excuses:
@@ -211,22 +213,24 @@ claude-addons/
 │   └── verify/
 │       ├── skills/verify/SKILL.md            # /verify skill
 │       └── agents/verify.md                  # Verification agent
+├── demo/                                      # Demo assets
 ├── .claude/agents/setup.md                    # "set me up" agent
 ├── install.sh                                 # Installer (with --status, --update, --memory)
 ├── uninstall.sh                               # Uninstaller
-├── test.sh                                    # Test suite
+├── test.sh                                    # Install/uninstall smoke tests
 ├── VERSION                                    # Semver version
+├── LICENSE                                    # MIT license
 ├── CLAUDE.md
 └── README.md
 ```
 
 ## Origin
 
-These features exist in Claude Code's internal Anthropic build but are compiled out of the public npm release via build-time `feature()` flags.
+The Dream and Verify workflows in this repo are described in and imported from [instructkr/claw-code](https://github.com/instructkr/claw-code).
 
-**Dream** is based on the internal auto-dream system (`services/autoDream/`) which runs a forked subagent after every session to consolidate memories. The internal version triggers automatically; this version provides the same consolidation prompt as a manual `/dream` skill, plus CLAUDE.md instructions that make the main agent proactively extract memories inline.
+**Dream** packages the Dream workflow as a manual `/dream` skill, plus optional `CLAUDE.md` instructions that make the main agent proactively extract memories inline.
 
-**Verify** is based on the internal verification agent (`tools/AgentTool/built-in/verificationAgent.ts`) gated behind `feature('VERIFICATION_AGENT')`. The system prompt is reproduced verbatim. The `/verify` skill auto-detects what changed via `git diff` and runs the same verification inline.
+**Verify** packages the Verify workflow as a `/verify` skill and a `verification` agent. The `/verify` skill auto-detects what changed via `git diff` and runs the same verification inline.
 
 ## Requirements
 

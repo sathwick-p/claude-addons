@@ -68,9 +68,6 @@ is_current() {
 
 install_addon_files() {
   local -n files_map=$1
-  local addon_name="$2"
-  local installed=0
-  local skipped=0
 
   for src in "${!files_map[@]}"; do
     local dest="${CLAUDE_DIR}/${files_map[$src]}"
@@ -80,11 +77,9 @@ install_addon_files() {
 
     if [ "$ACTION" = "update" ] && is_current "${SCRIPT_DIR}/${src}" "$dest"; then
       echo -e "  ${DIM}=${NC} ${files_map[$src]} ${DIM}(up to date)${NC}"
-      skipped=$((skipped + 1))
     else
       cp "${SCRIPT_DIR}/${src}" "$dest"
       echo -e "  ${GREEN}+${NC} ${files_map[$src]}"
-      installed=$((installed + 1))
     fi
   done
 
@@ -96,15 +91,12 @@ show_status() {
   echo -e "${BLUE}claude-addons${NC} v${VERSION}"
   echo ""
 
-  local all_installed=true
-
   # Dream
   echo -e "${BOLD}Dream${NC} (/dream)"
   for src in "${!DREAM_FILES[@]}"; do
     local dest="${CLAUDE_DIR}/${DREAM_FILES[$src]}"
     if [ ! -f "$dest" ]; then
       echo -e "  ${RED}✗${NC} ${DREAM_FILES[$src]} — not installed"
-      all_installed=false
     elif is_current "${SCRIPT_DIR}/${src}" "$dest"; then
       echo -e "  ${GREEN}✓${NC} ${DREAM_FILES[$src]} — current"
     else
@@ -119,7 +111,6 @@ show_status() {
     local dest="${CLAUDE_DIR}/${VERIFY_FILES[$src]}"
     if [ ! -f "$dest" ]; then
       echo -e "  ${RED}✗${NC} ${VERIFY_FILES[$src]} — not installed"
-      all_installed=false
     elif is_current "${SCRIPT_DIR}/${src}" "$dest"; then
       echo -e "  ${GREEN}✓${NC} ${VERIFY_FILES[$src]} — current"
     else
@@ -156,7 +147,7 @@ show_help() {
   echo "  --help, -h              Show this help"
   echo ""
   echo "Remote install:"
-  echo "  curl -fsSL https://raw.githubusercontent.com/USER/claude-addons/main/install.sh | bash"
+  echo "  curl -fsSL https://raw.githubusercontent.com/sathwickp/claude-addons/main/install.sh | bash"
   echo ""
   echo "Set CLAUDE_ADDONS_REPO to use a different repo URL for remote install."
   echo ""

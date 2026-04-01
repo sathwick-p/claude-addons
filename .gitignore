@@ -2,3 +2,9 @@
 *.swp
 *.swo
 *~
+
+# Generated demo assets (keep .gif and source files)
+demo/*.mp4
+demo/*.webm
+demo/*.sh
+marketing/*

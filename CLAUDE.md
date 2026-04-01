@@ -1,6 +1,6 @@
 # claude-addons
 
-This repo contains addon skills and agents for Claude Code extracted from the internal Anthropic build.
+This repo contains addon skills and agents for Claude Code based on workflows described in and imported from https://github.com/instructkr/claw-code.
 
 ## Setup task
 
