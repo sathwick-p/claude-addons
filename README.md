@@ -8,7 +8,7 @@ git clone https://github.com/sathwick-p/dream.git && cd dream && ./install.sh
 
 Or open the repo in Claude Code and say `set me up`.
 
-![demo](demo/dream-hd.gif)
+![demo](demo/dream-full-flow.gif)
 
 ---
 
