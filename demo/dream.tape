@@ -1,10 +1,10 @@
-# VHS tape file for recording the claude-addons demo GIF
+# VHS tape file for recording the dream demo GIF
 # Install: brew install vhs
-# Record: cd /path/to/claude-addons && vhs demo/claude-addons.tape
+# Record: cd /path/to/dream && vhs demo/dream.tape
 #
-# This produces demo/claude-addons.gif
+# This produces demo/dream.gif
 
-Output demo/claude-addons.gif
+Output demo/dream.gif
 
 Set Shell "bash"
 Set FontSize 14

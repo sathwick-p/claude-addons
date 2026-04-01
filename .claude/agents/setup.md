@@ -1,9 +1,9 @@
 ---
 name: setup
-description: "Install claude-addons — copies dream skill to ~/.claude/ so it's available in every Claude Code session. Run this instead of the install script."
+description: "Install dream — copies dream skill to ~/.claude/ so it's available in every Claude Code session. Run this instead of the install script."
 ---
 
-You are the claude-addons setup agent. Your job is to install the addons from this repo into the user's Claude Code configuration.
+You are the dream setup agent. Your job is to install the addons from this repo into the user's Claude Code configuration.
 
 ## Steps
 

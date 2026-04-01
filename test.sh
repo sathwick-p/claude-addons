@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Test suite for claude-addons install/uninstall cycle
+# Test suite for dream install/uninstall cycle
 # Run: ./test.sh
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
@@ -30,7 +30,7 @@ assert() {
 }
 
 echo ""
-echo "claude-addons test suite"
+echo "dream test suite"
 echo "========================"
 echo ""
 

@@ -1,14 +1,14 @@
-# claude-addons
+# dream
 
 Give Claude Code a long-term memory that actually works.
 
 ```bash
-git clone https://github.com/sathwick-p/claude-addons.git && cd claude-addons && ./install.sh
+git clone https://github.com/sathwick-p/dream.git && cd dream && ./install.sh
 ```
 
 Or open the repo in Claude Code and say `set me up`.
 
-![demo](demo/claude-addons.gif)
+![demo](demo/dream-hd.gif)
 
 ---
 
@@ -75,15 +75,15 @@ This makes Claude watch for and save signals automatically — corrections, role
 ## Install
 
 ```bash
-git clone https://github.com/sathwick-p/claude-addons.git
-cd claude-addons
+git clone https://github.com/sathwick-p/dream.git
+cd dream
 ./install.sh
 ```
 
 ### Remote install (no clone needed)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/sathwick-p/claude-addons/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/sathwick-p/dream/main/install.sh | bash
 ```
 
 ### What gets installed
@@ -115,7 +115,7 @@ One file. Nothing else modified.
 ## What's inside
 
 ```
-claude-addons/
+dream/
 ├── addons/
 │   └── dream/
 │       ├── CLAUDE.md                          # Enhanced memory extraction

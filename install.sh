@@ -19,11 +19,11 @@ VERSION="$(cat "${SCRIPT_DIR}/VERSION" 2>/dev/null || echo "unknown")"
 
 # --- Remote install support ---
 # If addon files aren't present (e.g., piped from curl), clone the repo first
-REPO_URL="${CLAUDE_ADDONS_REPO:-https://github.com/sathwick-p/claude-addons.git}"
+REPO_URL="${DREAM_REPO:-https://github.com/sathwick-p/dream.git}"
 if [ ! -d "${SCRIPT_DIR}/addons" ]; then
   TEMP_DIR="$(mktemp -d)"
   trap 'rm -rf "$TEMP_DIR"' EXIT
-  echo "Downloading claude-addons..."
+  echo "Downloading dream..."
   git clone --depth 1 "$REPO_URL" "$TEMP_DIR" 2>/dev/null
   SCRIPT_DIR="$TEMP_DIR"
   VERSION="$(cat "${SCRIPT_DIR}/VERSION" 2>/dev/null || echo "unknown")"
@@ -82,7 +82,7 @@ install_addon_files() {
 
 show_status() {
   echo ""
-  echo -e "${BLUE}claude-addons${NC} v${VERSION}"
+  echo -e "${BLUE}dream${NC} v${VERSION}"
   echo ""
 
   # Dream
@@ -110,7 +110,7 @@ show_status() {
 
 show_help() {
   echo ""
-  echo -e "${BLUE}claude-addons installer${NC} v${VERSION}"
+  echo -e "${BLUE}dream installer${NC} v${VERSION}"
   echo ""
   echo "Usage: ./install.sh [options]"
   echo ""
@@ -122,9 +122,9 @@ show_help() {
   echo "  --help, -h              Show this help"
   echo ""
   echo "Remote install:"
-  echo "  curl -fsSL https://raw.githubusercontent.com/sathwick-p/claude-addons/main/install.sh | bash"
+  echo "  curl -fsSL https://raw.githubusercontent.com/sathwick-p/dream/main/install.sh | bash"
   echo ""
-  echo "Set CLAUDE_ADDONS_REPO to use a different repo URL for remote install."
+  echo "Set DREAM_REPO to use a different repo URL for remote install."
   echo ""
 }
 
@@ -143,7 +143,7 @@ while [[ $# -gt 0 ]]; do
       fi
       MEMORY_PATH="$2"; shift 2 ;;
     --help|-h)       show_help; exit 0 ;;
-    --version|-v)    echo "claude-addons v${VERSION}"; exit 0 ;;
+    --version|-v)    echo "dream v${VERSION}"; exit 0 ;;
     *)               echo "Unknown option: $1"; echo "Run ./install.sh --help for usage."; exit 1 ;;
   esac
 done
@@ -156,7 +156,7 @@ fi
 
 # --- Install ---
 echo ""
-echo -e "${BLUE}claude-addons installer${NC} v${VERSION}"
+echo -e "${BLUE}dream installer${NC} v${VERSION}"
 echo "======================"
 echo ""
 

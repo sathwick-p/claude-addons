@@ -1,4 +1,4 @@
-# claude-addons
+# dream
 
 This repo contains addon skills and agents for Claude Code based on workflows described in and imported from https://github.com/instructkr/claw-code.
 

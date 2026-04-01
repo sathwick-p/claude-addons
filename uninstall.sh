@@ -18,7 +18,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 echo ""
-echo "claude-addons uninstaller"
+echo "dream uninstaller"
 echo "========================="
 echo ""
 
