@@ -22,28 +22,13 @@ echo "claude-addons uninstaller"
 echo "========================="
 echo ""
 
-# --- Remove skills and agents ---
+# --- Remove dream skill ---
 if [ -f "${CLAUDE_DIR}/skills/dream/SKILL.md" ]; then
   rm "${CLAUDE_DIR}/skills/dream/SKILL.md"
   rmdir "${CLAUDE_DIR}/skills/dream" 2>/dev/null || true
   echo -e "  ${RED}-${NC} Removed /dream skill"
 else
   echo -e "  ${DIM}skipped${NC} /dream skill (not found)"
-fi
-
-if [ -f "${CLAUDE_DIR}/skills/verify/SKILL.md" ]; then
-  rm "${CLAUDE_DIR}/skills/verify/SKILL.md"
-  rmdir "${CLAUDE_DIR}/skills/verify" 2>/dev/null || true
-  echo -e "  ${RED}-${NC} Removed /verify skill"
-else
-  echo -e "  ${DIM}skipped${NC} /verify skill (not found)"
-fi
-
-if [ -f "${CLAUDE_DIR}/agents/verify.md" ]; then
-  rm "${CLAUDE_DIR}/agents/verify.md"
-  echo -e "  ${RED}-${NC} Removed verification agent"
-else
-  echo -e "  ${DIM}skipped${NC} verification agent (not found)"
 fi
 
 echo ""
@@ -59,13 +44,10 @@ if [ -f "$GLOBAL_CLAUDE" ] && grep -q "Memory Consolidation — Enhanced Auto-Me
     echo ""
   fi
   if [[ $REPLY =~ ^[Yy]$ ]]; then
-    # Remove the memory consolidation block (from its header to end of file or next top-level heading)
-    # The block starts with "# Memory Consolidation" and is typically appended at the end
     if command -v python3 &>/dev/null; then
       python3 -c "
 import re, sys
 content = open('$GLOBAL_CLAUDE').read()
-# Remove the Memory Consolidation section (it's typically the whole file or appended at end)
 pattern = r'\n?# Memory Consolidation — Enhanced Auto-Memory Behavior.*'
 cleaned = re.sub(pattern, '', content, flags=re.DOTALL).rstrip()
 if cleaned:
@@ -76,10 +58,8 @@ else:
     print('  (file was empty after removal, deleted)')
 "
     else
-      # Fallback: use sed to remove from the header to end of file
       sed -i.bak '/^# Memory Consolidation — Enhanced Auto-Memory Behavior/,$d' "$GLOBAL_CLAUDE"
       rm -f "${GLOBAL_CLAUDE}.bak"
-      # Remove trailing whitespace
       if [ ! -s "$GLOBAL_CLAUDE" ]; then
         rm "$GLOBAL_CLAUDE"
         echo "  (file was empty after removal, deleted)"

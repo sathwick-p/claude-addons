@@ -29,20 +29,6 @@ assert() {
   fi
 }
 
-assert_file_contains() {
-  local description="$1"
-  local file="$2"
-  local pattern="$3"
-  TOTAL=$((TOTAL + 1))
-  if grep -q "$pattern" "$file" 2>/dev/null; then
-    echo -e "  ${GREEN}PASS${NC} $description"
-    PASSED=$((PASSED + 1))
-  else
-    echo -e "  ${RED}FAIL${NC} $description"
-    FAILED=$((FAILED + 1))
-  fi
-}
-
 echo ""
 echo "claude-addons test suite"
 echo "========================"
@@ -57,25 +43,19 @@ echo ""
 # --- Test: Source files exist ---
 echo "Source files:"
 assert "dream SKILL.md exists" "[ -f '${SCRIPT_DIR}/addons/dream/skills/dream/SKILL.md' ]"
-assert "verify SKILL.md exists" "[ -f '${SCRIPT_DIR}/addons/verify/skills/verify/SKILL.md' ]"
-assert "verify agent exists" "[ -f '${SCRIPT_DIR}/addons/verify/agents/verify.md' ]"
 assert "dream CLAUDE.md exists" "[ -f '${SCRIPT_DIR}/addons/dream/CLAUDE.md' ]"
 echo ""
 
 # --- Test: Full install ---
-echo "Install (all):"
+echo "Install:"
 bash "${SCRIPT_DIR}/install.sh" >/dev/null 2>&1
 assert "install.sh exits 0" "true"  # would have failed via set -e
 assert "/dream skill installed" "[ -f '${CLAUDE_DIR}/skills/dream/SKILL.md' ]"
-assert "/verify skill installed" "[ -f '${CLAUDE_DIR}/skills/verify/SKILL.md' ]"
-assert "verify agent installed" "[ -f '${CLAUDE_DIR}/agents/verify.md' ]"
 echo ""
 
 # --- Test: Installed content matches source ---
 echo "Content integrity:"
 assert "dream SKILL.md matches source" "diff -q '${SCRIPT_DIR}/addons/dream/skills/dream/SKILL.md' '${CLAUDE_DIR}/skills/dream/SKILL.md' >/dev/null 2>&1"
-assert "verify SKILL.md matches source" "diff -q '${SCRIPT_DIR}/addons/verify/skills/verify/SKILL.md' '${CLAUDE_DIR}/skills/verify/SKILL.md' >/dev/null 2>&1"
-assert "verify agent matches source" "diff -q '${SCRIPT_DIR}/addons/verify/agents/verify.md' '${CLAUDE_DIR}/agents/verify.md' >/dev/null 2>&1"
 echo ""
 
 # --- Test: Status ---
@@ -83,16 +63,6 @@ echo "Status:"
 STATUS_OUTPUT="$(bash "${SCRIPT_DIR}/install.sh" --status 2>&1)"
 assert "--status exits 0" "true"
 assert "--status mentions dream" "echo '${STATUS_OUTPUT}' | grep -qi 'dream'"
-assert "--status mentions verify" "echo '${STATUS_OUTPUT}' | grep -qi 'verify'"
-echo ""
-
-# --- Test: Selective install (reinstall just dream) ---
-echo "Selective install:"
-# Remove dream, keep verify
-rm -f "${CLAUDE_DIR}/skills/dream/SKILL.md"
-bash "${SCRIPT_DIR}/install.sh" dream >/dev/null 2>&1
-assert "dream reinstalled via selective install" "[ -f '${CLAUDE_DIR}/skills/dream/SKILL.md' ]"
-assert "verify still present after selective dream install" "[ -f '${CLAUDE_DIR}/skills/verify/SKILL.md' ]"
 echo ""
 
 # --- Test: Memory flag ---
@@ -108,8 +78,6 @@ echo ""
 echo "Uninstall:"
 bash "${SCRIPT_DIR}/uninstall.sh" --yes >/dev/null 2>&1
 assert "dream skill removed" "[ ! -f '${CLAUDE_DIR}/skills/dream/SKILL.md' ]"
-assert "verify skill removed" "[ ! -f '${CLAUDE_DIR}/skills/verify/SKILL.md' ]"
-assert "verify agent removed" "[ ! -f '${CLAUDE_DIR}/agents/verify.md' ]"
 echo ""
 
 # --- Test: Reinstall (for user's benefit — leave addons installed) ---
