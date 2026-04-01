@@ -106,3 +106,9 @@ Update `MEMORY.md` so it stays under 200 lines AND under ~25KB. It's an **index*
 ---
 
 Return a brief summary of what you consolidated, updated, or pruned. If nothing changed (memories are already tight), say so.
+
+End with a stats line in this format:
+
+**Dream complete:** X memories total | Y created, Z updated, W merged, V pruned.
+
+(Omit categories with a count of 0.)
