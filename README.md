@@ -3,7 +3,7 @@
 Power-ups for Claude Code — extracted from the internal Anthropic build.
 
 ```bash
-git clone https://github.com/sathwickp/claude-addons.git && cd claude-addons && ./install.sh
+git clone https://github.com/sathwick-p/claude-addons.git && cd claude-addons && ./install.sh
 ```
 
 Or open the repo in Claude Code and say `set me up`.
