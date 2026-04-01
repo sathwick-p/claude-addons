@@ -80,8 +80,6 @@ cd dream
 ./install.sh
 ```
 
-<img src="demo/demo2.gif" width="800" alt="real terminal — set me up in Claude Code">
-
 ### Remote install (no clone needed)
 
 ```bash
