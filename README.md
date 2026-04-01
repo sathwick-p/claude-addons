@@ -8,7 +8,7 @@ git clone https://github.com/sathwick-p/dream.git && cd dream && ./install.sh
 
 Or open the repo in Claude Code and say `set me up`.
 
-![demo](demo/dream-full-flow.gif)
+<img src="demo/dream-hd.gif" width="800" alt="dream demo — install and /dream flow">
 
 ---
 
@@ -79,6 +79,8 @@ git clone https://github.com/sathwick-p/dream.git
 cd dream
 ./install.sh
 ```
+
+<img src="demo/demo2.gif" width="800" alt="real terminal — set me up in Claude Code">
 
 ### Remote install (no clone needed)
 
